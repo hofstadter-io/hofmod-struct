@@ -1,6 +1,8 @@
 package example
 
 import (
+	"list"
+
 	schema "github.com/hofstadter-io/hof/schema"
 
 	"github.com/hofstadter-io/hofmod-struct/gen"
@@ -33,6 +35,25 @@ MyDM: schema.#Datamodel & {
 						schema.#CommonFields
 						email: schema.#Email
 						password: schema.#Password
+					}
+
+					Views: {
+						login: {
+							Fields: {
+								email: user.Fields.email
+								password: user.Fields.password
+							}
+						}
+						info: {
+							_exclude: ["password", "CreatedAt"]
+							Fields: {
+								for k, v in user.Fields {
+									if !list.Contains(_exclude, k) {
+										"\(k)": v
+									}
+								}
+							}
+						}
 					}
 				}
 
