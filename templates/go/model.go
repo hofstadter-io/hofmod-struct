@@ -1,1 +1,2 @@
-package {{ MODEL.PackageName }}
+package {{ .MODEL.PackageName }}
+

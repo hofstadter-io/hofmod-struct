@@ -9,6 +9,10 @@ import (
 DM: _ @gen(dm,datamodel)
 DM: gen.#HofGenerator & {
 	Datamodel: MyDM
+	Outdir: "./dm/"
+
+	// Needed because we are using the generator from within it's directory
+	PackageName: ""
 }
 
 MyDM: schema.#Datamodel & {

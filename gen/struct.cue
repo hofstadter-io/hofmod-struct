@@ -8,14 +8,14 @@ import (
 
 #HofGenerator: schema.#HofGenerator & {
   Datamodel: schema.#Datamodel
-  Outdir?: string | *"./dm"
+  Outdir?: string | *"./"
 
   // Internal
   In: {
     DM: Datamodel
   }
 
-  PackageName: "github.com/hofstadter-io/hofmod-server"
+  PackageName: string | *"github.com/hofstadter-io/hofmod-server"
 
   PartialsDir:  "./partials/"
   TemplatesDir: "./templates/"
@@ -39,7 +39,7 @@ import (
           PackageName: "dm"
         }
       }
-      TemplateName: "modelset.go"
+      TemplateName: "go/modelset.go"
       Filepath: "\(Outdir)/\(M.Name).go"
 		}
 	]], 1)
@@ -51,10 +51,12 @@ import (
     for _, M in list.FlattenN(MPP, 1)
     {
       In: {
-        MODEL: M
-        PackageName: "\(M.Parent.Name)"
+				MODEL: {
+					M
+					PackageName: "\(M.Parent.Name)"
+				}
       }
-      TemplateName: "model.go"
+      TemplateName: "go/model.go"
       Filepath: "\(Outdir)/\(M.Parent.Name)/\(M.Name).go"
     }
   ]
