@@ -45,7 +45,7 @@ MyDM: schema.#Datamodel & {
 							}
 						}
 						info: {
-							_exclude: ["password", "CreatedAt"]
+							_exclude: ["password", "CreatedAt", "DeletedAt"]
 							Fields: {
 								for k, v in user.Fields {
 									if !list.Contains(_exclude, k) {
