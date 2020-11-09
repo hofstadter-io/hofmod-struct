@@ -1,12 +1,12 @@
 type {{ .MODEL.ModelName }} struct {
 	{{ if .MODEL.ORM }}
-	ID uuid.UUID
+	ID uuid.UUID `gorm:"primaryKey"`
 
 	CreatedAt time.Time
 
 	UpdatedAt time.Time
 	{{ if .MODEL.SoftDelete }}
-	DeletedAt time.Time
+	DeletedAt gorm.DeletedAt `gorm:"index"`
 	{{ end }}
 	{{ end }}
 
